@@ -52,5 +52,21 @@ export const menuData = {
           destination: "gen-wilderness"
         }
       ]
+    },
+    "gen-dungeon": {
+        title: "New Dungeon",
+        subTitle: "Welcome to the dungeon..",
+    },
+    "gen-town": {
+        title: "New Town",
+        subTitle: "Somewhere safe, or is it?",
+    },
+    "gen-creature": {
+        title: "New Creature",
+        subTitle: "Fantastic beasts.",
+    },
+    "gen-npc": {
+        title: "New NPC",
+        subTitle: "A friendly face?",
     }
   }

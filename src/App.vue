@@ -26,6 +26,8 @@ export default {
     return {
       ptBoxes: [
         "ptb-main",
+        "ptb-main",
+        "ptb-main",
         "ptb-generate"
       ],
       menuData
