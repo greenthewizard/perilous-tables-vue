@@ -3,15 +3,24 @@
         class="btn"
         type="button"
         :value="btnValue"
-        :data-destination="btnDestination">
+        :data-destination="btnDestination"
+        @click="updateBoxDestination(btnDestination)">
 </template>
 
 <script>
+import { EventBus } from '../eventBus'
+
 export default {
     props: [
         "btnValue",
-        "btnDestination"
-    ]
+        "btnDestination",
+        "boxId"
+    ],
+    methods: {
+        updateBoxDestination(dest) {
+            EventBus.$emit('updateBoxDestination', dest, this.boxId);
+        }
+    }
 }
 </script>
 

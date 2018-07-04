@@ -20,7 +20,10 @@
             </div>
         </header>
         <div class="pt-box__content">
-            <button-list :buttons="menuData.buttons"></button-list>
+            <button-list 
+                :buttons="menuData.buttons"
+                :box-id="boxId">
+            </button-list>
         </div>
     </div>
 </template>
@@ -33,7 +36,8 @@ export default {
         ButtonList
     },
     props: [
-        "menuData"
+        "menuData",
+        "boxId"
     ],
     data: function () {
         return {

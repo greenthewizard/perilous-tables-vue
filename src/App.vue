@@ -2,7 +2,12 @@
   <div id="app">
     <h1>Perilous Tables</h1>
     <div class="grid-container">
-      <pt-box v-for="(key, i) in ptBoxes" :key="i" :menuData="menuData[key]"></pt-box>
+      <pt-box 
+        v-for="(key, i) in ptBoxes" 
+        :key="key + '-' +  i"
+        :box-id="i" 
+        :menuData="menuData[key]">
+      </pt-box>
     </div>
   </div>
 </template>
@@ -10,6 +15,7 @@
 <script>
 import PtBox from './components/PtBox.vue'
 import { menuData } from './menuData'
+import { EventBus } from './eventBus'
 
 export default {
   name: 'app',
@@ -26,9 +32,12 @@ export default {
     }
   },
   methods: {
-    updateBoxDestination: function(i, dest) {
-      this.ptBoxes[i] = dest;
+    updateBoxDestination: function(dest, i) {
+      this.ptBoxes.splice(i, 1, dest);
     }
+  },
+  created: function() {
+    EventBus.$on('updateBoxDestination', this.updateBoxDestination);
   }
 }
 </script>

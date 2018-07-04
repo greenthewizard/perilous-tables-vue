@@ -4,7 +4,8 @@
             :key="i">
             <pt-button
                 :btnValue="btn.value"
-                :btnDestination="btn.destination">
+                :btnDestination="btn.destination"
+                :box-id="boxId">
             </pt-button>
         </li>
     </ul>
@@ -18,7 +19,8 @@ export default {
         PtButton
     },
     props: [
-        "buttons"
+        "buttons",
+        "boxId"
     ]
 }
 </script>
