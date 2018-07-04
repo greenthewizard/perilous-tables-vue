@@ -4,8 +4,8 @@
             <div class="pt-box__title-card">
                 <div class="l-flexbox">
                     <div class="l-flexitem">
-                        <h2 class="pt-box__title">{{ title }}</h2>
-                        <h3 class="pt-box__sub-title">{{ subTitle }}</h3>
+                        <h2 class="pt-box__title">{{ menuData.title }}</h2>
+                        <h3 class="pt-box__sub-title">{{ menuData.subTitle }}</h3>
                     </div>
                     <div class="l-flexitem l-flexitem--end-cap">
                         <div class="pt-box__title-btn">
@@ -20,17 +20,24 @@
             </div>
         </header>
         <div class="pt-box__content">
-            
+            <button-list :buttons="menuData.buttons"></button-list>
         </div>
     </div>
 </template>
 
 <script>
+import ButtonList from './ButtonList.vue';
+
 export default {
+    components: {
+        ButtonList
+    },
+    props: [
+        "menuData"
+    ],
     data: function () {
         return {
-            title: 'Generate',
-            subTitle: 'Draw maps, leave blanks...'
+            
         }
     }
 }

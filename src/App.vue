@@ -2,18 +2,33 @@
   <div id="app">
     <h1>Perilous Tables</h1>
     <div class="grid-container">
-      <pt-box></pt-box>
+      <pt-box v-for="(key, i) in ptBoxes" :key="i" :menuData="menuData[key]"></pt-box>
     </div>
   </div>
 </template>
 
 <script>
 import PtBox from './components/PtBox.vue'
+import { menuData } from './menuData'
 
 export default {
   name: 'app',
   components: {
     PtBox
+  },
+  data: function () {
+    return {
+      ptBoxes: [
+        "ptb-main",
+        "ptb-generate"
+      ],
+      menuData
+    }
+  },
+  methods: {
+    updateBoxDestination: function(i, dest) {
+      this.ptBoxes[i] = dest;
+    }
   }
 }
 </script>
