@@ -6,7 +6,8 @@
         v-for="(key, i) in ptBoxes" 
         :key="key + '-' +  i"
         :box-id="i" 
-        :menuData="menuData[key]">
+        :menuData="menuData[key.current]"
+        :history="key.history.length > 0">
       </pt-box>
     </div>
   </div>
@@ -25,21 +26,28 @@ export default {
   data: function () {
     return {
       ptBoxes: [
-        "ptb-main",
-        "ptb-main",
-        "ptb-main",
-        "ptb-generate"
+        {
+          current: "ptb-main",
+          history: []
+        }
       ],
       menuData
     }
   },
   methods: {
     updateBoxDestination: function(dest, i) {
-      this.ptBoxes.splice(i, 1, dest);
+      const boxObj = this.ptBoxes[i];
+      boxObj.history.push(boxObj.current);
+      boxObj.current = dest;
+    },
+    goBack: function(i) {
+      const boxObj = this.ptBoxes[i];
+      boxObj.current = boxObj.history.pop();
     }
   },
   created: function() {
     EventBus.$on('updateBoxDestination', this.updateBoxDestination);
+    EventBus.$on('goBack', this.goBack);
   }
 }
 </script>

@@ -10,10 +10,12 @@
                     <div class="l-flexitem l-flexitem--end-cap">
                         <div class="pt-box__title-btn">
                             <input 
+                                v-if="history"
                                 class="icon"
                                 type="image"
-                                alt="dice"
-                                :src="require('../assets/svg/dice.svg')">
+                                alt="back arrow"
+                                :src="require('../assets/svg/back.svg')"
+                                @click="goBack">
                         </div>
                     </div>
                 </div>
@@ -30,6 +32,7 @@
 
 <script>
 import ButtonList from './ButtonList.vue';
+import { EventBus } from '../eventBus';
 
 export default {
     components: {
@@ -37,11 +40,17 @@ export default {
     },
     props: [
         "menuData",
-        "boxId"
+        "boxId",
+        "history"
     ],
     data: function () {
         return {
             
+        }
+    },
+    methods: {
+        goBack() {
+            EventBus.$emit('goBack', this.boxId);
         }
     }
 }
