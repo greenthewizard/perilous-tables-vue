@@ -2,7 +2,7 @@ export const menuData = {
     "ptb-main": {
       title: "Main",
       subTitle: "Create and explore..",
-      buttons: [
+      buttonList: [
         {
           value: "Generate",
           destination: "ptb-generate"
@@ -10,15 +10,13 @@ export const menuData = {
         {
           value: "Explore",
           destination: "ptb-explore"
-
-          
         }
       ]
     },
     "ptb-generate": {
       title: "Generate",
       subTitle: "Draw maps, leave blanks..",
-      buttons: [
+      buttonList: [
         {
           value: "Dungeon",
           destination: "gen-dungeon"
@@ -40,7 +38,7 @@ export const menuData = {
     "ptb-explore": {
       title: "Explore",
       subTitle: "Portray a fantastic world..",
-      buttons: [
+      buttonList: [
         {
           value: "Town",
           destination: "gen-town"
@@ -58,17 +56,21 @@ export const menuData = {
     "gen-dungeon": {
         title: "New Dungeon",
         subTitle: "Welcome to the dungeon..",
+        opensNewBox: true
     },
     "gen-town": {
         title: "New Town",
         subTitle: "Somewhere safe, or is it?",
+        opensNewBox: true
     },
     "gen-creature": {
         title: "New Creature",
         subTitle: "Fantastic beasts.",
+        opensNewBox: true
     },
     "gen-npc": {
         title: "New NPC",
         subTitle: "A friendly face?",
+        opensNewBox: true
     }
   }

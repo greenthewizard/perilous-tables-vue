@@ -7,23 +7,17 @@
                         <h2 class="pt-box__title">{{ menuData.title }}</h2>
                         <h3 class="pt-box__sub-title">{{ menuData.subTitle }}</h3>
                     </div>
-                    <div class="l-flexitem l-flexitem--end-cap">
-                        <div class="pt-box__title-btn">
-                            <input 
-                                v-if="history"
-                                class="icon"
-                                type="image"
-                                alt="back arrow"
-                                :src="require('../assets/svg/back.svg')"
-                                @click="goBack">
-                        </div>
-                    </div>
+                    <title-button
+                        v-for="(btn, i) in titleButtons"
+                        :key="i"
+                        :props="btn">
+                    </title-button>
                 </div>
             </div>
         </header>
         <div class="pt-box__content">
             <button-list 
-                :buttons="menuData.buttons"
+                :buttons="menuData.buttonList"
                 :box-id="boxId">
             </button-list>
         </div>
@@ -32,11 +26,13 @@
 
 <script>
 import ButtonList from './ButtonList.vue';
+import TitleButton from './TitleButton.vue';
 import { EventBus } from '../eventBus';
 
 export default {
     components: {
-        ButtonList
+        ButtonList,
+        TitleButton
     },
     props: [
         "menuData",
@@ -45,12 +41,28 @@ export default {
     ],
     data: function () {
         return {
-            
+            titleButtons: [
+                {
+                    alt: "dice",
+                    src: require("../assets/svg/dice.svg"),
+                    action: this.rollTable,
+                    args: []
+                },
+                {
+                    alt: "back arrow",
+                    src: require("../assets/svg/back.svg"),
+                    action: this.goBack,
+                    args: []
+                }
+            ]
         }
     },
     methods: {
         goBack() {
             EventBus.$emit('goBack', this.boxId);
+        },
+        rollTable(args) {
+            console.log(...args);
         }
     }
 }
@@ -84,8 +96,4 @@ export default {
     font-size: 1.3rem
     color: $lightgrey
     margin: 0
-.icon
-    width: 4rem
-    height: 4rem
-    outline: none
 </style>

@@ -4,7 +4,7 @@
         type="button"
         :value="btnValue"
         :data-destination="btnDestination"
-        @click="updateBoxDestination(btnDestination)">
+        @click="navigate(btnDestination)">
 </template>
 
 <script>
@@ -17,8 +17,8 @@ export default {
         "boxId"
     ],
     methods: {
-        updateBoxDestination(dest) {
-            EventBus.$emit('updateBoxDestination', dest, this.boxId);
+        navigate(dest) {
+            EventBus.$emit('navigate', dest, this.boxId);
         }
     }
 }

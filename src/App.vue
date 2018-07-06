@@ -35,18 +35,34 @@ export default {
     }
   },
   methods: {
-    updateBoxDestination: function(dest, i) {
+    navigate: function(dest, i) {
+      const boxObj = this.ptBoxes[i];
+      if (menuData[dest].opensNewBox) {
+        this.addNewBox(dest);
+      } else {
+        this.updateBoxDestination(dest, i);
+      }
+    },
+    goBack: function(i) {
+      const boxObj = this.ptBoxes[i];
+      if (boxObj.history.length > 0) {
+        boxObj.current = boxObj.history.pop();
+      }
+    },
+    updateBoxDestination(dest, i) {
       const boxObj = this.ptBoxes[i];
       boxObj.history.push(boxObj.current);
       boxObj.current = dest;
     },
-    goBack: function(i) {
-      const boxObj = this.ptBoxes[i];
-      boxObj.current = boxObj.history.pop();
+    addNewBox: function(dest) {
+      this.ptBoxes.push({
+        current: dest,
+        history: []
+      });
     }
   },
   created: function() {
-    EventBus.$on('updateBoxDestination', this.updateBoxDestination);
+    EventBus.$on('navigate', this.navigate);
     EventBus.$on('goBack', this.goBack);
   }
 }
