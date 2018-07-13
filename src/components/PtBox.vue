@@ -4,22 +4,19 @@
             <div class="pt-box__title-card">
                 <div class="l-flexbox">
                     <div class="l-flexitem">
-                        <h2 class="pt-box__title">{{ menuData.title }}</h2>
-                        <h3 class="pt-box__sub-title">{{ menuData.subTitle }}</h3>
+                        <h2 class="pt-box__title">{{ title }}</h2>
+                        <h3 class="pt-box__sub-title">{{ subTitle }}</h3>
                     </div>
-                    <title-button
+                    <!-- <title-button
                         v-for="(btn, i) in titleButtons"
                         :key="i"
                         :props="btn">
-                    </title-button>
+                    </title-button> -->
                 </div>
             </div>
         </header>
         <div class="pt-box__content">
-            <button-list 
-                :buttons="menuData.buttonList"
-                :box-id="boxId">
-            </button-list>
+
         </div>
     </div>
 </template>
@@ -27,6 +24,7 @@
 <script>
 import ButtonList from './ButtonList.vue';
 import TitleButton from './TitleButton.vue';
+import { menuData } from '../menuData';
 import { EventBus } from '../eventBus';
 
 export default {
@@ -35,34 +33,28 @@ export default {
         TitleButton
     },
     props: [
-        "menuData",
-        "boxId",
-        "history"
+        "initial"
     ],
     data: function () {
         return {
-            titleButtons: [
-                {
-                    alt: "dice",
-                    src: require("../assets/svg/dice.svg"),
-                    action: this.rollTable,
-                    args: []
-                },
-                {
-                    alt: "back arrow",
-                    src: require("../assets/svg/back.svg"),
-                    action: this.goBack,
-                    args: []
-                }
-            ]
+            current: this.initial,
+            title: menuData[this.initial]['title'],
+            subTitle: menuData[this.initial]['subTitle'],
+            buttonList: menuData[this.initial]['buttonList'],
+            history: []
         }
     },
     methods: {
         goBack() {
-            EventBus.$emit('goBack', this.boxId);
+            if (this.history.length > 0) {
+                this.goTo(this.history.pop());
+            }
         },
-        rollTable(args) {
-            console.log(...args);
+        goTo(dest) {
+            this.current = dest;
+            this.title = menuData[this.current]['title'];
+            this.subTitle = menuData[this.current]['subTitle'];
+            this.buttonList = menuData[this.current]['buttonList'];
         }
     }
 }

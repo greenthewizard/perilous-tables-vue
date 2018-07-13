@@ -14,7 +14,8 @@ export default {
     props: [
         "btnValue",
         "btnDestination",
-        "boxId"
+        "boxId",
+        "show"
     ],
     methods: {
         navigate(dest) {

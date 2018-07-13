@@ -1,22 +1,27 @@
 <template>
   <div id="app">
     <h1>Perilous Tables</h1>
+    <input 
+      type="button"
+      value="Add Box"
+      @click="testMeth('ptb-generate')">
     <div class="grid-container">
       <pt-box 
-        v-for="(key, i) in ptBoxes" 
-        :key="key + '-' +  i"
-        :box-id="i" 
-        :menuData="menuData[key.current]"
-        :history="key.history.length > 0">
+        v-for="{ destination, id } in ptBoxes" 
+        :key="id"
+        :initial="destination">
       </pt-box>
     </div>
   </div>
 </template>
 
 <script>
-import PtBox from './components/PtBox.vue'
-import { menuData } from './menuData'
-import { EventBus } from './eventBus'
+//Components
+import PtBox from './components/PtBox.vue';
+
+//Libraries/Utils
+import { EventBus } from './eventBus';
+import { uniqueId } from 'lodash';
 
 export default {
   name: 'app',
@@ -26,44 +31,29 @@ export default {
   data: function () {
     return {
       ptBoxes: [
-        {
-          current: "ptb-main",
-          history: []
-        }
-      ],
-      menuData
+        this.createNewBox('ptb-main')
+      ]
     }
   },
   methods: {
-    navigate: function(dest, i) {
-      const boxObj = this.ptBoxes[i];
-      if (menuData[dest].opensNewBox) {
-        this.addNewBox(dest);
-      } else {
-        this.updateBoxDestination(dest, i);
-      }
-    },
-    goBack: function(i) {
-      const boxObj = this.ptBoxes[i];
-      if (boxObj.history.length > 0) {
-        boxObj.current = boxObj.history.pop();
-      }
-    },
-    updateBoxDestination(dest, i) {
-      const boxObj = this.ptBoxes[i];
-      boxObj.history.push(boxObj.current);
-      boxObj.current = dest;
-    },
     addNewBox: function(dest) {
-      this.ptBoxes.push({
-        current: dest,
-        history: []
-      });
+      this.ptBoxes.push(
+        this.createNewBox(dest)
+      );
+    },
+    createNewBox: function(dest) {
+      return {
+        destination: dest,
+        id: uniqueId('ptBox_')
+      }
+    },
+    testMeth: function (dest) {
+      EventBus.$emit('addNewBox', dest);
     }
   },
   created: function() {
-    EventBus.$on('navigate', this.navigate);
-    EventBus.$on('goBack', this.goBack);
+    //Register Event Listeners
+    EventBus.$on('addNewBox', (dest) => this.addNewBox(dest));
   }
 }
 </script>

@@ -1,7 +1,8 @@
 <template>   
     <div 
         class="l-flexitem l-flexitem"
-        :class="{ 'l-flexitem--end-cap': isFirst }">
+        :class="{ 'l-flexitem--end-cap': isFirst }"
+        v-if="visible">
         <input 
             class="icon"
             type="image"
@@ -14,14 +15,15 @@
 <script>
 export default {
     props: [
-        "props"
+        "props",
     ],
     data: function () {
         return {
             alt: this.props.alt,
             src: this.props.src,
             action: this.props.action,
-            args: this.props.args
+            args: this.props.args,
+            visible: this.props.visible
         }
     },
     methods: {
