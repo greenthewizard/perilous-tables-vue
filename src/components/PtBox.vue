@@ -4,8 +4,8 @@
             <div class="pt-box__title-card">
                 <div class="l-flexbox">
                     <div class="l-flexitem">
-                        <h2 class="pt-box__title">{{ title }}</h2>
-                        <h3 class="pt-box__sub-title">{{ subTitle }}</h3>
+                        <h2 class="pt-box__title">{{ getDestValue('title') }}</h2>
+                        <h3 class="pt-box__sub-title">{{ getDestValue('subTitle') }}</h3>
                     </div>
                     <!-- <title-button
                         v-for="(btn, i) in titleButtons"
@@ -16,7 +16,14 @@
             </div>
         </header>
         <div class="pt-box__content">
-
+            <input 
+                type="button"
+                value="Go To"
+                @click="goTo('ptb-main')">
+            <input 
+                type="button"
+                value="Go Back"
+                @click="goBack()">
         </div>
     </div>
 </template>
@@ -25,7 +32,7 @@
 import ButtonList from './ButtonList.vue';
 import TitleButton from './TitleButton.vue';
 import { menuData } from '../menuData';
-import { EventBus } from '../eventBus';
+// import { EventBus } from '../eventBus';
 
 export default {
     components: {
@@ -38,23 +45,21 @@ export default {
     data: function () {
         return {
             current: this.initial,
-            title: menuData[this.initial]['title'],
-            subTitle: menuData[this.initial]['subTitle'],
-            buttonList: menuData[this.initial]['buttonList'],
             history: []
         }
     },
     methods: {
         goBack() {
             if (this.history.length > 0) {
-                this.goTo(this.history.pop());
+                this.current = this.history.pop();
             }
         },
         goTo(dest) {
+            this.history.push(this.current);
             this.current = dest;
-            this.title = menuData[this.current]['title'];
-            this.subTitle = menuData[this.current]['subTitle'];
-            this.buttonList = menuData[this.current]['buttonList'];
+        },
+        getDestValue(key) {
+            return menuData[this.current][key];
         }
     }
 }
