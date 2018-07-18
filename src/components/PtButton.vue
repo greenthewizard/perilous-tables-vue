@@ -2,24 +2,22 @@
     <input 
         class="btn"
         type="button"
-        :value="btnValue"
-        :data-destination="btnDestination"
-        @click="navigate(btnDestination)">
+        :value="value"
+        @click="btnEmit">
 </template>
 
 <script>
-import { EventBus } from '../eventBus'
+import { EventBus } from '../eventBus';
 
 export default {
     props: [
-        "btnValue",
-        "btnDestination",
-        "boxId",
-        "show"
+        "value",
+        "event",
+        "args"
     ],
     methods: {
-        navigate(dest) {
-            EventBus.$emit('navigate', dest, this.boxId);
+        btnEmit: function() {
+            EventBus.$emit(this.event, this.args);
         }
     }
 }

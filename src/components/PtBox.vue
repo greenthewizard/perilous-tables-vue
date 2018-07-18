@@ -16,36 +16,42 @@
             </div>
         </header>
         <div class="pt-box__content">
-            <input 
-                type="button"
+            <pt-button 
                 value="Go To"
-                @click="goTo('ptb-main')">
-            <input 
-                type="button"
-                value="Go Back"
-                @click="goBack()">
+                :event="this.id + '-go-to'"
+                args="ptb-generate">
+            </pt-button>
+            <pt-button 
+                value="Add Box"
+                event="addNewBox"
+                args="ptb-explore">
+            </pt-button>
         </div>
     </div>
 </template>
 
 <script>
-import ButtonList from './ButtonList.vue';
-import TitleButton from './TitleButton.vue';
+import PtButton from './PtButton.vue';
 import { menuData } from '../menuData';
-// import { EventBus } from '../eventBus';
+import { EventBus } from '../eventBus';
+
+//Libraries/Utils
+import { uniqueId } from 'lodash';
 
 export default {
     components: {
-        ButtonList,
-        TitleButton
+        PtButton
     },
     props: [
         "initial"
     ],
     data: function () {
+        const id = uniqueId('pt-box-');
+
         return {
             current: this.initial,
-            history: []
+            history: [],
+            id
         }
     },
     methods: {
@@ -61,6 +67,9 @@ export default {
         getDestValue(key) {
             return menuData[this.current][key];
         }
+    },
+    created: function() {
+        EventBus.$on(this.id + '-go-to', dest => this.goTo(dest));
     }
 }
 </script>
