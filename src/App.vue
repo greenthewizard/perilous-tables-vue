@@ -1,10 +1,6 @@
 <template>
   <div id="app">
     <h1>Perilous Tables</h1>
-    <input 
-      type="button"
-      value="Add Box"
-      @click="testMeth('ptb-generate')">
     <div class="grid-container">
       <pt-box 
         v-for="{ destination, id } in ptBoxes" 

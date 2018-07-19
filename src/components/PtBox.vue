@@ -16,31 +16,46 @@
             </div>
         </header>
         <div class="pt-box__content">
-            <pt-button 
-                value="Go To"
-                :event="this.id + '-go-to'"
-                args="ptb-generate">
-            </pt-button>
-            <pt-button 
-                value="Add Box"
-                event="addNewBox"
-                args="ptb-explore">
-            </pt-button>
+            <button-grid>
+                <pt-button 
+                    value="Go To"
+                    :event="this.id + '-go-to'"
+                    args="ptb-generate">
+                </pt-button>
+                <pt-button 
+                    value="Add Box"
+                    event="addNewBox"
+                    args="ptb-explore">
+                </pt-button>
+                <pt-button 
+                    value="Add Box"
+                    event="addNewBox"
+                    args="ptb-explore">
+                </pt-button>
+                <pt-button 
+                    value="Add Box"
+                    event="addNewBox"
+                    args="ptb-explore">
+                </pt-button>
+            </button-grid>
         </div>
     </div>
 </template>
 
 <script>
+//Components
 import PtButton from './PtButton.vue';
-import { menuData } from '../menuData';
-import { EventBus } from '../eventBus';
+import ButtonGrid from './ButtonGrid.vue';
 
 //Libraries/Utils
+import { menuData } from '../menuData';
+import { EventBus } from '../eventBus';
 import { uniqueId } from 'lodash';
 
 export default {
     components: {
-        PtButton
+        PtButton,
+        ButtonGrid
     },
     props: [
         "initial"
