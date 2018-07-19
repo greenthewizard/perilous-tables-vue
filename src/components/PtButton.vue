@@ -21,6 +21,9 @@ export default {
             EventBus.$emit(
                 this.boxId + '-' + this.event, 
                 this.args);
+            EventBus.$emit(
+                'app-' + this.event, 
+                this.args);
         }
     }
 }
