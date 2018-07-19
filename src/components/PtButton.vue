@@ -13,11 +13,14 @@ export default {
     props: [
         "value",
         "event",
-        "args"
+        "args",
+        "boxId"
     ],
     methods: {
         btnEmit: function() {
-            EventBus.$emit(this.event, this.args);
+            EventBus.$emit(
+                this.boxId + '-' + this.event, 
+                this.args);
         }
     }
 }

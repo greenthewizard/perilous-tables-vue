@@ -16,28 +16,13 @@
             </div>
         </header>
         <div class="pt-box__content">
-            <button-grid>
-                <pt-button 
-                    value="Go To"
-                    :event="this.id + '-go-to'"
-                    args="ptb-generate">
-                </pt-button>
-                <pt-button 
-                    value="Add Box"
-                    event="addNewBox"
-                    args="ptb-explore">
-                </pt-button>
-                <pt-button 
-                    value="Add Box"
-                    event="addNewBox"
-                    args="ptb-explore">
-                </pt-button>
-                <pt-button 
-                    value="Add Box"
-                    event="addNewBox"
-                    args="ptb-explore">
-                </pt-button>
-            </button-grid>
+            <component 
+                v-for="(content, i) in getDestValue('content')"
+                :key="i"
+                :is="content.component"
+                v-bind="content.props"
+                :boxId="id">
+            </component>
         </div>
     </div>
 </template>
@@ -84,7 +69,8 @@ export default {
         }
     },
     created: function() {
-        EventBus.$on(this.id + '-go-to', dest => this.goTo(dest));
+        // EventBus.$on(this.id + '-goTo', dest => this.goTo(dest));
+        EventBus.registerListener(this.id, 'goTo', this.goTo);
     }
 }
 </script>
