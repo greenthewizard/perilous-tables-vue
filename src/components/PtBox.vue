@@ -31,6 +31,7 @@
 //Components
 import PtButton from './PtButton.vue';
 import ButtonGrid from './ButtonGrid.vue';
+import RadioButtonGrid from './RadioButtonGrid.vue';
 
 //Libraries/Utils
 import { menuData } from '../menuData';
@@ -40,7 +41,8 @@ import { uniqueId } from 'lodash';
 export default {
     components: {
         PtButton,
-        ButtonGrid
+        ButtonGrid,
+        RadioButtonGrid
     },
     props: [
         "initial"

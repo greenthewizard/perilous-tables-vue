@@ -88,7 +88,26 @@ export const menuData = {
         subTitle: "Welcome to the dungeon..",
         content: [
           {
-            component: 'generator'
+            component: 'RadioButtonGrid',
+            props: {
+              buttons: [
+                {
+                  value: "Small",
+                  event: "",
+                  args:""
+                },
+                {
+                  value: "Medium",
+                  event: "",
+                  args:""
+                },
+                {
+                  value: "Large",
+                  event: "",
+                  args:""
+                }
+              ]
+            }
           }
         ]
     },
