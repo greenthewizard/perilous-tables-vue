@@ -7,11 +7,17 @@
                         <h2 class="pt-box__title">{{ getDestValue('title') }}</h2>
                         <h3 class="pt-box__sub-title">{{ getDestValue('subTitle') }}</h3>
                     </div>
-                    <!-- <title-button
-                        v-for="(btn, i) in titleButtons"
-                        :key="i"
-                        :props="btn">
-                    </title-button> -->
+                     <div 
+                        class="l-flexitem l-flexitem"
+                        :class="{ 'l-flexitem--end-cap': isFirst }">
+                        <pt-button
+                            alt="back arrow"
+                            src="../assets/svg/back.svg"
+                            type="image"
+                            event="goBack"
+                            :boxId="id">
+                        </pt-button>
+                    </div>
                 </div>
             </div>
         </header>
@@ -34,7 +40,7 @@ import ButtonGrid from './ButtonGrid.vue';
 import RadioButtonGrid from './RadioButtonGrid.vue';
 
 //Libraries/Utils
-import { menuData } from '../menuData';
+import { menuData } from '../menuData'; 
 import { EventBus } from '../eventBus';
 import { uniqueId } from 'lodash';
 
@@ -71,7 +77,6 @@ export default {
         }
     },
     created: function() {
-        // EventBus.$on(this.id + '-goTo', dest => this.goTo(dest));
         EventBus.on(this.id, 'goTo', this.goTo);
     }
 }

@@ -1,7 +1,9 @@
 <template>
     <input 
-        class="btn"
-        type="button"
+        :class="type"
+        :type="type"
+        :alt="alt"
+        :src="src"
         :value="value"
         @click="btnEmit">
 </template>
@@ -10,16 +12,37 @@
 import { EventBus } from '../eventBus';
 
 export default {
-    props: [
-        "value",
-        "event",
-        "args",
-        "boxId"
-    ],
+    props: {
+        alt: String,
+        src: String,
+        event: String,
+        args: Array,
+        boxId: String,
+        value: {
+            type: String,
+            required: true
+        },
+        type: {
+            type: String,
+            default: "button"
+        },
+        global: {
+            type: Boolean,
+            default: false
+        },
+        local: {
+            type: Boolean,
+            default: true
+        }
+    },
     methods: {
-        btnEmit: function() {
-            EventBus.emit(this.boxId, this.event, this.args);
-            EventBus.emit('app', this.event, this.args);
+        btnEmit() {
+            if (this.local) {
+                EventBus.emit(this.boxId, this.event, this.args);
+            }
+            if (this.global) {
+                EventBus.emit('app', this.event, this.args);
+            }
         }
     }
 }
@@ -27,8 +50,12 @@ export default {
 
 <style lang="sass" scoped>
 @import '../assets/styles/colors'
+.icon
+    width: 4rem
+    height: 4rem
+    outline: none
 
-.btn
+.button
     border: 2px solid $lightblue
     border-radius: 8px
     background: transparent
@@ -36,15 +63,15 @@ export default {
     font-size: 1.3rem
     outline: none
 
-.btn:hover 
+.button:hover 
     border-color: $darkblue
 
-.btn:active
+.button:active
     background-color: $lightblue
     border-color: $darkblue
     color: $white
 
-.btn--selected
+.button--selected
     background-color: $lightblue
     color: $white
 </style>

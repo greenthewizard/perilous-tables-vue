@@ -33,22 +33,26 @@ export const menuData = {
               {
                 value: "Dungeon",
                 event: "addNewBox",
-                args:"gen-dungeon"
+                args:"gen-dungeon",
+                global: true
               },
               {
                 value: "Town",
                 event: "addNewBox",
-                args:"gen-town"
+                args:"gen-town",
+                global: true
               },
               {
                 value: "Creature",
                 event: "addNewBox",
-                args:"gen-creature"
+                args:"gen-creature",
+                global: true
               },
               {
                 value: "NPC",
                 event: "addNewBox",
-                args:"gen-npc"
+                args:"gen-npc",
+                global: true
               },
             ]
           }
