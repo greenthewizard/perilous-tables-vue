@@ -1,6 +1,6 @@
 const tableProto = {};
 const tableData = {};
-const dir = 'tables/'
+const dir = 'assets/tables/'
 
 const randInt = (max) => {
     return Math.floor(Math.random() * Math.floor(max + 1));

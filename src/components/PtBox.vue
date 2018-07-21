@@ -45,6 +45,7 @@
 import PtButton from './PtButton.vue';
 import ButtonGrid from './ButtonGrid.vue';
 import RadioButtonGrid from './RadioButtonGrid.vue';
+import PTable from './PTable.vue';
 
 //Libraries/Utils
 import { menuData } from '../menuData'; 
@@ -55,7 +56,8 @@ export default {
     components: {
         PtButton,
         ButtonGrid,
-        RadioButtonGrid
+        RadioButtonGrid,
+        PTable
     },
     props: [
         "initial"

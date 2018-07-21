@@ -112,7 +112,7 @@ export const menuData = {
           {
             alt: "A dice",
             icon: "dice",
-            event: "rollBox"
+            event: "roll"
           }
         ],
         content: [
@@ -140,9 +140,16 @@ export const menuData = {
     "gen-creature": {
       title: "New Creature",
       subTitle: "",
+      titleButtons: [
+        {
+          alt: "A dice",
+          icon: "dice",
+          event: "roll"
+        }
+      ],
       content: [
         {
-          component: 'generator'
+          component: 'PTable'
         }
       ]
     },
