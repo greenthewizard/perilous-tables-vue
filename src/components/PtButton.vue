@@ -3,24 +3,26 @@
         :class="type"
         :type="type"
         :alt="alt"
-        :src="src"
+        :src="icons[icon]"
         :value="value"
         @click="btnEmit">
 </template>
 
 <script>
 import { EventBus } from '../eventBus';
+import diceIcon from '../assets/svg/dice.svg';
+import backIcon from '../assets/svg/back.svg';
 
 export default {
     props: {
+        value: String,
         alt: String,
-        src: String,
-        event: String,
-        args: Array,
+        icon: String,
         boxId: String,
-        value: {
-            type: String,
-            required: true
+        event: String,
+        args: {
+            type: Array,
+            default: () => []
         },
         type: {
             type: String,
@@ -35,13 +37,24 @@ export default {
             default: true
         }
     },
+    data() {
+        return {
+            icons: {
+                dice: diceIcon,
+                back: backIcon
+            }
+        }
+    },
     methods: {
         btnEmit() {
+            if (!this.event) {
+                return false
+            }
             if (this.local) {
-                EventBus.emit(this.boxId, this.event, this.args);
+                EventBus.emit(this.boxId, this.event, ...this.args);
             }
             if (this.global) {
-                EventBus.emit('app', this.event, this.args);
+                EventBus.emit('app', this.event, ...this.args);
             }
         }
     }

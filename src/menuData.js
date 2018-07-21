@@ -10,12 +10,16 @@ export const menuData = {
               {
                 value: "Generate",
                 event: "goTo",
-                args:"ptb-generate"
+                args:[ 
+                  "ptb-generate"
+                ],
               },
               {
                 value: "Explore",
                 event: "goTo",
-                args:"ptb-explore"
+                args:[ 
+                  "ptb-explore"
+                ],
               }
             ]
           }
@@ -33,25 +37,33 @@ export const menuData = {
               {
                 value: "Dungeon",
                 event: "addNewBox",
-                args:"gen-dungeon",
+                args:[ 
+                  "gen-dungeon",
+                ],
                 global: true
               },
               {
                 value: "Town",
                 event: "addNewBox",
-                args:"gen-town",
+                args:[ 
+                  "gen-town",
+                ],
                 global: true
               },
               {
                 value: "Creature",
                 event: "addNewBox",
-                args:"gen-creature",
+                args:[ 
+                  "gen-creature",
+                ],
                 global: true
               },
               {
                 value: "NPC",
                 event: "addNewBox",
-                args:"gen-npc",
+                args:[ 
+                  "gen-npc",
+                ],
                 global: true
               },
             ]
@@ -70,17 +82,23 @@ export const menuData = {
               {
                 value: "Town",
                 event: "addNewBox",
-                args:"exp-town"
+                args:[ 
+                  "exp-town"
+                ],
               },
               {
                 value: "Dungeon",
                 event: "addNewBox",
-                args:"exp-dungeon"
+                args:[ 
+                  "exp-dungeon"
+                ],
               },
               {
                 value: "Wilderness",
                 event: "addNewBox",
-                args:"exp-wilderness"
+                args:[ 
+                  "exp-wilderness"
+                ],
               }
             ]
           }
@@ -90,30 +108,29 @@ export const menuData = {
     "gen-dungeon": {
         title: "New Dungeon",
         subTitle: "Welcome to the dungeon..",
+        titleButtons: [
+          {
+            alt: "A dice",
+            icon: "dice",
+            event: "rollBox"
+          }
+        ],
         content: [
           {
             component: 'RadioButtonGrid',
             props: {
               buttons: [
                 {
-                  value: "Small",
-                  event: "",
-                  args:""
+                  value: "Small"
                 },
                 {
-                  value: "Medium",
-                  event: "",
-                  args:""
+                  value: "Medium"
                 },
                 {
-                  value: "Large",
-                  event: "",
-                  args:""
+                  value: "Large"
                 },
                 {
-                  value: "Huge",
-                  event: "",
-                  args:""
+                  value: "Huge"
                 }
               ]
             }

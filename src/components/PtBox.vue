@@ -11,11 +11,18 @@
                         class="l-flexitem l-flexitem--end-cap">
                         <pt-button
                             type="image"
-                            :src="require('../assets/svg/back.svg')"
+                            icon="back"
                             value="Back"
                             event="goBack"
                             :boxId="id"
                             v-if="history.length > 0">
+                        </pt-button>
+                        <pt-button
+                            v-for="(titleButton, i) in getDestValue('titleButtons')"
+                            type="image"
+                            :key="i"
+                            :boxId="id"
+                            v-bind="titleButton">
                         </pt-button>
                     </div>
                 </div>
