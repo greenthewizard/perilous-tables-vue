@@ -8,14 +8,14 @@
                         <h3 class="pt-box__sub-title">{{ getDestValue('subTitle') }}</h3>
                     </div>
                      <div 
-                        class="l-flexitem l-flexitem"
-                        :class="{ 'l-flexitem--end-cap': isFirst }">
+                        class="l-flexitem l-flexitem--end-cap">
                         <pt-button
-                            alt="back arrow"
-                            src="../assets/svg/back.svg"
                             type="image"
+                            :src="require('../assets/svg/back.svg')"
+                            value="Back"
                             event="goBack"
-                            :boxId="id">
+                            :boxId="id"
+                            v-if="history.length > 0">
                         </pt-button>
                     </div>
                 </div>

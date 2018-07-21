@@ -50,7 +50,7 @@ export default {
 
 <style lang="sass" scoped>
 @import '../assets/styles/colors'
-.icon
+.image
     width: 4rem
     height: 4rem
     outline: none
