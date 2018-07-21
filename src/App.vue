@@ -49,7 +49,7 @@ export default {
   },
   created: function() {
     //Register Event Listeners
-    EventBus.registerListener('app', 'addNewBox', this.addNewBox)
+    EventBus.on('app', 'addNewBox', this.addNewBox)
   }
 }
 </script>

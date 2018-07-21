@@ -72,7 +72,7 @@ export default {
     },
     created: function() {
         // EventBus.$on(this.id + '-goTo', dest => this.goTo(dest));
-        EventBus.registerListener(this.id, 'goTo', this.goTo);
+        EventBus.on(this.id, 'goTo', this.goTo);
     }
 }
 </script>

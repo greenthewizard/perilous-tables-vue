@@ -18,12 +18,8 @@ export default {
     ],
     methods: {
         btnEmit: function() {
-            EventBus.$emit(
-                this.boxId + '-' + this.event, 
-                this.args);
-            EventBus.$emit(
-                'app-' + this.event, 
-                this.args);
+            EventBus.emit(this.boxId, this.event, this.args);
+            EventBus.emit('app', this.event, this.args);
         }
     }
 }
@@ -45,7 +41,8 @@ export default {
 
 .btn:active
     background-color: $lightblue
-    border-color: $lightblue
+    border-color: $darkblue
+    color: $white
 
 .btn--selected
     background-color: $lightblue

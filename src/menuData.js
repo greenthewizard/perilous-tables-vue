@@ -105,6 +105,11 @@ export const menuData = {
                   value: "Large",
                   event: "",
                   args:""
+                },
+                {
+                  value: "Huge",
+                  event: "",
+                  args:""
                 }
               ]
             }

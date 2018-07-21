@@ -2,8 +2,11 @@ import Vue from "vue";
 
 export const EventBus = new Vue({
     methods: {
-        registerListener(componentId, event, callback) {
+        on(componentId, event, callback) {
             this.$on(`${componentId}-${event}`, callback)
+        },
+        emit(componentId, event, data) {
+            this.$emit(`${componentId}-${event}`, data);
         }
     },
 });
