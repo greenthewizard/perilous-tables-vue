@@ -78,6 +78,7 @@ export default {
     },
     created: function() {
         EventBus.on(this.id, 'goTo', this.goTo);
+        EventBus.on(this.id, 'goBack', this.goBack);
     }
 }
 </script>
