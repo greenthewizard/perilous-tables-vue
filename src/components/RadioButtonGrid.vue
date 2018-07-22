@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :style="imbedStyle">
         <pt-button
             v-for="(btn, i) in buttons"
             :key="i"
@@ -15,13 +15,23 @@
     import PtButton from './PtButton.vue';
 
     export default {
-        props: ["buttons", "boxId"],
+        props: {
+            cols: {
+                type: Number,
+                default: 2
+            },
+            buttons: Array,
+            boxId: String
+        },
         components: {
             PtButton
         },
         data() {
             return {
-                selected: null
+                selected: null,
+                imbedStyle: {
+                    gridTemplateColumns: `repeat(${this.cols}, 1fr)`
+                }
             }
         },
         methods: {
@@ -40,8 +50,10 @@
 
     div
         display: grid
-        grid-template-columns: repeat(2, 1fr)
         grid-gap: 0.3rem
+    
+    .col-3
+       
 
     .selected
         background-color: $lightblue

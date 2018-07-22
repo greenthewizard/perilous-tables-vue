@@ -183,6 +183,7 @@ export const menuData = {
         {
           component: 'RadioButtonGrid',
           props: {
+            cols: 3,
             buttons: [
               {
                 value: "Wilderness"
