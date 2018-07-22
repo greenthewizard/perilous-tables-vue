@@ -51,10 +51,10 @@ export default {
                 return false
             }
             if (this.local) {
-                EventBus.emit(this.boxId, this.event, ...this.args);
+                EventBus.emit(this.boxId, this.event, this.args);
             }
             if (this.global) {
-                EventBus.emit('app', this.event, ...this.args);
+                EventBus.emit('app', this.event, this.args);
             }
         }
     }

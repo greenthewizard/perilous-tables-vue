@@ -37,7 +37,8 @@ export const menuData = {
               {
                 value: "Dungeon",
                 event: "addNewBox",
-                args:[ 
+                args:[
+                  "generators", 
                   "gen-dungeon",
                 ],
                 global: true
@@ -45,7 +46,8 @@ export const menuData = {
               {
                 value: "Town",
                 event: "addNewBox",
-                args:[ 
+                args:[
+                  "generators", 
                   "gen-town",
                 ],
                 global: true
@@ -53,7 +55,8 @@ export const menuData = {
               {
                 value: "Creature",
                 event: "addNewBox",
-                args:[ 
+                args:[
+                  "generators", 
                   "gen-creature",
                 ],
                 global: true
@@ -61,7 +64,8 @@ export const menuData = {
               {
                 value: "NPC",
                 event: "addNewBox",
-                args:[ 
+                args:[
+                  "generators", 
                   "gen-npc",
                 ],
                 global: true
@@ -83,6 +87,7 @@ export const menuData = {
                 value: "Town",
                 event: "addNewBox",
                 args:[ 
+                  "explore",
                   "exp-town"
                 ],
               },
@@ -90,6 +95,7 @@ export const menuData = {
                 value: "Dungeon",
                 event: "addNewBox",
                 args:[ 
+                  "explore",
                   "exp-dungeon"
                 ],
               },
@@ -97,6 +103,7 @@ export const menuData = {
                 value: "Wilderness",
                 event: "addNewBox",
                 args:[ 
+                  "explore",
                   "exp-wilderness"
                 ],
               }
@@ -165,9 +172,29 @@ export const menuData = {
     "gen-npc": {
       title: "New NPC",
       subTitle: "",
+      titleButtons: [
+        {
+          alt: "A dice",
+          icon: "dice",
+          event: "roll"
+        }
+      ],
       content: [
         {
-          component: 'generator'
+          component: 'RadioButtonGrid',
+          props: {
+            buttons: [
+              {
+                value: "Wilderness"
+              },
+              {
+                value: "Rural"
+              },
+              {
+                value: "Urban"
+              }
+            ]
+          }
         }
       ]
     }

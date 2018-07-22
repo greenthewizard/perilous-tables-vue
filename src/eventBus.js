@@ -5,8 +5,8 @@ export const EventBus = new Vue({
         on(componentId, event, callback) {
             this.$on(`${componentId}-${event}`, callback)
         },
-        emit(componentId, event, data) {
-            this.$emit(`${componentId}-${event}`, data);
+        emit(componentId, event, args) {
+            this.$emit(`${componentId}-${event}`, args);
         }
     },
 });

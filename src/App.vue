@@ -3,7 +3,7 @@
     <h1>Perilous Tables</h1>
     <div class="grid-container">
       <pt-box 
-        v-for="{ destination, id } in ptBoxes" 
+        v-for="{ destination, id } in getCombinedBoxList()" 
         :key="id"
         :initial="destination">
       </pt-box>
@@ -26,14 +26,24 @@ export default {
   },
   data: function () {
     return {
-      ptBoxes: [
-        this.createNewBox('ptb-main')
-      ]
+      ptBoxes: {
+        "main": [
+          this.createNewBox('ptb-main')
+        ],
+        "generators": [
+
+        ]
+      }
     }
   },
   methods: {
-    addNewBox: function(dest) {
-      this.ptBoxes.push(
+    addNewBox: function(args) {
+      const [section, dest] = args;
+      console.log(section, dest);
+      if (!this.ptBoxes[section]) {
+        this.$set(this.ptBoxes, section, []);
+      }
+      this.ptBoxes[section].push(
         this.createNewBox(dest)
       );
     },
@@ -43,8 +53,12 @@ export default {
         id: uniqueId('ptBox_')
       }
     },
-    testMeth: function (dest) {
-      EventBus.$emit('addNewBox', dest);
+    getCombinedBoxList: function () {
+      const boxList = Object.values(this.ptBoxes).reduce((acc, val) => {
+        acc.push(...val.slice().reverse());
+        return acc;
+      }, []);
+      return boxList;
     }
   },
   created: function() {
