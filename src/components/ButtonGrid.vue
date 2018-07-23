@@ -1,5 +1,6 @@
 <template>
     <div :style="imbedStyle">
+        <h2 v-if="groupName">{{ groupName }}</h2>
         <pt-button
             v-for="(btn, i) in buttons"
             :key="i"
@@ -12,11 +13,12 @@
 </template>
 
 <script>
-    import PtButton from './PtButton.vue';
+import PtButton from './PtButton.vue';
 import { EventBus } from '../eventBus';
 
     export default {
         props: {
+            groupName: String,
             cols: {
                 type: Number,
                 default: 2
@@ -36,7 +38,7 @@ import { EventBus } from '../eventBus';
                 imbedStyle: {
                     gridTemplateColumns: `repeat(${this.cols}, 1fr)`
                 },
-                selected: this.buttons.map((btn, j) => {
+                selected: this.buttons.map(btn => {
                     return btn.selected;
                 })
             }
@@ -51,12 +53,26 @@ import { EventBus } from '../eventBus';
                         break;
                     case "checkbox":
                         this.selected.splice(i, 1, !this.selected[i]);
+                        break;
                     default:
                         break;
                 }
                 
+            },
+            getSelectedButtons() {
+                const buttonNames = this.buttons.map(btn => btn.value);
+                const buttonData = this.selected.reduce((acc, selected, i) => {
+                    if (selected) {
+                        acc[buttonNames[i]] = selected;
+                    }
+                    return acc;
+                }, {});
+                return buttonData;
             }
         },
+        created() {
+            EventBus.on(this.boxId, 'roll', this.getSelectedButtons);
+        }
     }
 </script>
 
@@ -65,9 +81,15 @@ import { EventBus } from '../eventBus';
 
     div
         display: grid
-        grid-gap: 0.3rem 
+        grid-gap: 0.3rem
+        h2
+            grid-column: 1 / -1
+            font-size: 1.5rem
+            font-weight: normal
+            border-bottom: 1px solid $lightgrey
+            margin: 0 0 .5rem 0
 
-    .selected
-        background-color: $lightblue
-        color: $white
+        .selected
+            background-color: $lightblue
+            color: $white
 </style>

@@ -29,9 +29,6 @@ export default {
       ptBoxes: {
         "main": [
           this.createNewBox('ptb-main')
-        ],
-        "generators": [
-
         ]
       }
     }
@@ -39,7 +36,6 @@ export default {
   methods: {
     addNewBox: function(args) {
       const [section, dest] = args;
-      console.log(section, dest);
       if (!this.ptBoxes[section]) {
         this.$set(this.ptBoxes, section, []);
       }
