@@ -1,6 +1,10 @@
 <template>
     <input 
-        :class="type"
+        :class="{ 
+            icon: type === 'image', 
+            btn: type === 'button',
+            selected
+        }"
         :type="type"
         :alt="alt"
         :src="icons[icon]"
@@ -20,6 +24,10 @@ export default {
         icon: String,
         boxId: String,
         event: String,
+        selected: {
+            type: Boolean,
+            default: false
+        },
         args: {
             type: Array,
             default: () => []
@@ -63,12 +71,12 @@ export default {
 
 <style lang="sass" scoped>
 @import '../assets/styles/colors'
-.image
+.icon
     width: 4rem
     height: 4rem
     outline: none
 
-.button
+.btn
     border: 2px solid $lightblue
     border-radius: 8px
     background: transparent
@@ -76,15 +84,15 @@ export default {
     font-size: 1.3rem
     outline: none
 
-.button:hover 
+.btn:hover 
     border-color: $darkblue
 
-.button:active
+.btn:active
     background-color: $lightblue
     border-color: $darkblue
     color: $white
 
-.button--selected
+.btn--selected
     background-color: $lightblue
     color: $white
 </style>

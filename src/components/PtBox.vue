@@ -7,7 +7,7 @@
                         <h2 class="pt-box__title">{{ getDestValue('title') }}</h2>
                         <h3 class="pt-box__sub-title">{{ getDestValue('subTitle') }}</h3>
                     </div>
-                     <div 
+                    <div 
                         class="l-flexitem l-flexitem--end-cap">
                         <pt-button
                             type="image"
@@ -44,7 +44,6 @@
 //Components
 import PtButton from './PtButton.vue';
 import ButtonGrid from './ButtonGrid.vue';
-import RadioButtonGrid from './RadioButtonGrid.vue';
 import PTable from './PTable.vue';
 
 //Libraries/Utils
@@ -56,7 +55,6 @@ export default {
     components: {
         PtButton,
         ButtonGrid,
-        RadioButtonGrid,
         PTable
     },
     props: [

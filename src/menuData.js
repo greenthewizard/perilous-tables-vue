@@ -124,20 +124,25 @@ export const menuData = {
         ],
         content: [
           {
-            component: 'RadioButtonGrid',
+            component: 'ButtonGrid',
             props: {
+              type: 'radio',
               buttons: [
                 {
-                  value: "Small"
+                  value: "Small",
+                  selected: false
                 },
                 {
-                  value: "Medium"
+                  value: "Medium",
+                  selected: true
                 },
                 {
-                  value: "Large"
+                  value: "Large",
+                  selected: false
                 },
                 {
-                  value: "Huge"
+                  value: "Huge",
+                  selected: false
                 }
               ]
             }
@@ -181,18 +186,22 @@ export const menuData = {
       ],
       content: [
         {
-          component: 'RadioButtonGrid',
+          component: 'ButtonGrid',
           props: {
+            type: "checkbox",
             cols: 3,
             buttons: [
               {
-                value: "Wilderness"
+                value: "Wilderness",
+                selected: false
               },
               {
-                value: "Rural"
+                value: "Rural",
+                selected: false
               },
               {
-                value: "Urban"
+                value: "Urban",
+                selected: false
               }
             ]
           }
