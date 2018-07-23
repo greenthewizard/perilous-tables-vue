@@ -4,10 +4,12 @@
             <div class="title-card">
                 <div class="l-flexbox">
                     <div class="l-flexitem">
-                        <h2 class="title">{{ getDestValue('title') }}</h2>
-                        <h3 class="sub-title">{{ getDestValue('subTitle') }}</h3>
+                        <h2 class="title">{{ title }}</h2>
+                        <h3 class="sub-title">{{ subTitle }}</h3>
                     </div>
-                    <div 
+                    <slot name="titleButtons"></slot>
+                    <!-- TITLE BUTTONS -->
+                    <!-- <div 
                         class="l-flexitem l-flexitem--end-cap">
                         <pt-button
                             type="image"
@@ -18,24 +20,26 @@
                             v-if="history.length > 0">
                         </pt-button>
                         <pt-button
-                            v-for="(titleButton, i) in getDestValue('titleButtons')"
+                            v-for="(titleButton, i) in titleButtons"
                             type="image"
                             :key="i"
                             :boxId="id"
                             v-bind="titleButton">
                         </pt-button>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </header>
         <div class="content">
-            <component 
-                v-for="(content, i) in getDestValue('content')"
+            <slot name="content"></slot>
+            <!-- CONTENT -->
+            <!-- <component 
+                v-for="(content, i) in content"
                 :key="i"
                 :is="content.component"
                 v-bind="content.props"
                 :boxId="id">
-            </component>
+            </component> -->
         </div>
     </div>
 </template>
@@ -47,7 +51,7 @@ import ButtonGrid from './ButtonGrid.vue';
 import PTable from './PTable.vue';
 
 //Libraries/Utils
-import { menuData } from '../menuData'; 
+import { menuData } from '../menuData';
 import { EventBus } from '../eventBus';
 import { uniqueId } from 'lodash';
 
@@ -57,9 +61,10 @@ export default {
         ButtonGrid,
         PTable
     },
-    props: [
-        "initial"
-    ],
+    props: {
+        title: String,
+        subTitle: String
+    },
     data: function () {
         const id = uniqueId('pt-box-');
 

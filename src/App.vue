@@ -2,18 +2,18 @@
   <div id="app">
     <h1>Perilous Tables</h1>
     <div class="grid-container">
-      <pt-box 
-        v-for="{ destination, id } in getCombinedBoxList()" 
-        :key="id"
-        :initial="destination">
-      </pt-box>
+      <component 
+        v-for="boxObj in getCombinedBoxList()" 
+        :is="boxObj.name"
+        :key="boxObj.id">
+      </component>
     </div>
   </div>
 </template>
 
 <script>
 //Components
-import PtBox from './components/PtBox.vue';
+import boxComponents from './components/boxBarrel.js';
 
 //Libraries/Utils
 import { EventBus } from './eventBus';
@@ -21,36 +21,29 @@ import { uniqueId } from 'lodash';
 
 export default {
   name: 'app',
-  components: {
-    PtBox
-  },
+  components: Object.assign({}, boxComponents),
   data: function () {
     return {
-      ptBoxes: {
+      boxes: {
         "main": [
-          this.createNewBox('ptb-main')
+          this.createNewBox('NavMain'),
+          this.createNewBox('NavMain')
         ]
       }
     }
   },
   methods: {
-    addNewBox: function(args) {
-      const [section, dest] = args;
-      if (!this.ptBoxes[section]) {
-        this.$set(this.ptBoxes, section, []);
-      }
-      this.ptBoxes[section].push(
-        this.createNewBox(dest)
-      );
+    addNewBox: function(group, componentName) {
+      this.boxes[group].push(componentName);
     },
-    createNewBox: function(dest) {
+    createNewBox: function(componentName) {
       return {
-        destination: dest,
-        id: uniqueId('ptBox_')
+        name: componentName,
+        id: uniqueId('box-')
       }
     },
     getCombinedBoxList: function () {
-      const boxList = Object.values(this.ptBoxes).reduce((acc, val) => {
+      const boxList = Object.values(this.boxes).reduce((acc, val) => {
         acc.push(...val.slice().reverse());
         return acc;
       }, []);
