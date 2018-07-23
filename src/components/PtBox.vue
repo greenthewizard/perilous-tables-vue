@@ -1,11 +1,11 @@
 <template>
-    <div class="pt-box">
-        <header class="pt-box__header">
-            <div class="pt-box__title-card">
+    <div class="box">
+        <header class="header">
+            <div class="title-card">
                 <div class="l-flexbox">
                     <div class="l-flexitem">
-                        <h2 class="pt-box__title">{{ getDestValue('title') }}</h2>
-                        <h3 class="pt-box__sub-title">{{ getDestValue('subTitle') }}</h3>
+                        <h2 class="title">{{ getDestValue('title') }}</h2>
+                        <h3 class="sub-title">{{ getDestValue('subTitle') }}</h3>
                     </div>
                     <div 
                         class="l-flexitem l-flexitem--end-cap">
@@ -28,7 +28,7 @@
                 </div>
             </div>
         </header>
-        <div class="pt-box__content">
+        <div class="content">
             <component 
                 v-for="(content, i) in getDestValue('content')"
                 :key="i"
@@ -93,7 +93,7 @@ export default {
 <style lang="sass" scoped>
 @import '../assets/styles/colors'
 
-.pt-box 
+.box 
     position: relative
     border: 1px solid black
     border-radius: 8px
@@ -103,17 +103,17 @@ export default {
         font-size: 2.2rem
 
     &:hover
-        .pt-box__content
+        .content
             p
                 color: $lightblue
     
-.pt-box__header
+.header
     padding: 0 0 .5rem 0
-.pt-box__title
+.title
     margin: 0
-.pt-box__title--highlight
+.title--highlight
     color: $lightblue
-.pt-box__sub-title
+.sub-title
     font-weight: normal
     font-size: 1.3rem
     color: $lightgrey
