@@ -81,7 +81,7 @@ export default {
         },
         getDestValue(key) {
             return menuData[this.current][key];
-        },
+        }
     },
     created: function() {
         EventBus.on(this.id, 'goTo', this.goTo);

@@ -4,6 +4,7 @@
             v-for="(btn, i) in buttons"
             :key="i"
             :boxId="boxId"
+            :selected="selected[i]"
             v-bind="btn"
             @click.native="onClick(i)">
         </pt-button>
@@ -12,6 +13,7 @@
 
 <script>
     import PtButton from './PtButton.vue';
+import { EventBus } from '../eventBus';
 
     export default {
         props: {
@@ -34,24 +36,21 @@
                 imbedStyle: {
                     gridTemplateColumns: `repeat(${this.cols}, 1fr)`
                 },
-                // This creates a reference, and not a copy,
-                // but it appears to work without giving a warning..
-                // May need to look into creating a copy of the object 
-                // instead of a reference, if weird errors come up.
-                dataButtons: this.buttons
+                selected: this.buttons.map((btn, j) => {
+                    return btn.selected;
+                })
             }
         },
         methods: {
             onClick(i) {
                 switch (this.type) {
                     case "radio":
-                        this.dataButtons = this.dataButtons.map((btn, j) => {
-                            btn.selected = j === i ? true : false;
-                            return btn;
+                        this.selected = this.selected.map((btn, j) => {
+                            return this.selected = j === i ? true : false;
                         });
                         break;
                     case "checkbox":
-                        this.dataButtons[i].selected = !this.dataButtons[i].selected;
+                        this.selected.splice(i, 1, !this.selected[i]);
                     default:
                         break;
                 }
