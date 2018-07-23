@@ -5,7 +5,8 @@
       <component 
         v-for="boxObj in getCombinedBoxList()" 
         :is="boxObj.name"
-        :key="boxObj.id">
+        :key="boxObj.id"
+        v-bind="boxObj.props">
       </component>
     </div>
   </div>
@@ -25,22 +26,29 @@ export default {
   data: function () {
     return {
       boxes: {
-        "main": [
-          this.createNewBox('NavMain'),
-          this.createNewBox('NavMain')
-        ]
+        "main": []
       }
     }
   },
   methods: {
-    addNewBox: function(group, componentName) {
-      this.boxes[group].push(componentName);
-    },
-    createNewBox: function(componentName) {
+    createNewBox: function (group, componentName) {
+      const id = uniqueId('box-');
       return {
         name: componentName,
-        id: uniqueId('box-')
-      }
+        id,
+        props: {
+          boxId: id,
+          groupName: group
+        }
+      };
+    },
+    addNewBox: function(groupName, componentName) {
+      this.boxes[groupName].push(this.createNewBox(groupName, componentName));
+    },
+    replaceBox(args) {
+      const [groupName, boxId, name] = args;
+      const targetIndex = this.boxes[groupName].findIndex(el => el.id === boxId);
+      this.boxes[groupName].splice(targetIndex, 1, this.createNewBox(groupName, name));
     },
     getCombinedBoxList: function () {
       const boxList = Object.values(this.boxes).reduce((acc, val) => {
@@ -53,6 +61,10 @@ export default {
   created: function() {
     //Register Event Listeners
     EventBus.on('app', 'addNewBox', this.addNewBox)
+    EventBus.on('app', 'replaceBox', this.replaceBox)
+
+    this.addNewBox('main', 'NavMain');
+    this.addNewBox('main', 'NavMain');
   }
 }
 </script>

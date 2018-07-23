@@ -32,14 +32,6 @@
         </header>
         <div class="content">
             <slot name="content"></slot>
-            <!-- CONTENT -->
-            <!-- <component 
-                v-for="(content, i) in content"
-                :key="i"
-                :is="content.component"
-                v-bind="content.props"
-                :boxId="id">
-            </component> -->
         </div>
     </div>
 </template>

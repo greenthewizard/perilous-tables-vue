@@ -6,12 +6,16 @@
         <template slot="content">
             <button-grid>
                 <pt-button
-                    value="Generate"
-                    @click.native="replaceBox('NavGenerate')">
+                    value="Dungeon">
                 </pt-button>
                 <pt-button
-                    value="Explore"
-                    @click.native="replaceBox('NavExplore')">
+                    value="Town">
+                </pt-button>
+                <pt-button
+                    value="Creature">
+                </pt-button>
+                <pt-button
+                    value="NPC">
                 </pt-button>
             </button-grid>
         </template>
@@ -38,8 +42,8 @@ export default {
     data() {
         return {
             boxProps: {
-                title: 'Main',
-                subTitle: 'Create and explore..'
+                title: 'Generate',
+                subTitle: 'Draw maps, leave blanks..'
             }
         }
     },
