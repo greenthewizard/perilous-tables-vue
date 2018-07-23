@@ -7,11 +7,15 @@
             <button-grid>
                 <pt-button
                     value="Generate"
-                    @click.native="replaceBox('NavGenerate')">
+                    context="app"
+                    event="replaceBox"
+                    :args="[groupName, boxId, 'NavGenerate']">
                 </pt-button>
                 <pt-button
                     value="Explore"
-                    @click.native="replaceBox('NavExplore')">
+                    context="app"
+                    event="replaceBox"
+                    :args="[groupName, boxId, 'NavExplore']">
                 </pt-button>
             </button-grid>
         </template>
@@ -22,8 +26,6 @@
 import PtBox from '../PtBox.vue';
 import ButtonGrid from '../ButtonGrid.vue';
 import PtButton from '../PtButton.vue';
-
-import { EventBus } from '../../eventBus';
 
 export default {
     props: {
@@ -42,15 +44,7 @@ export default {
                 subTitle: 'Create and explore..'
             }
         }
-    },
-    methods: {
-        replaceBox(name) {
-            EventBus.emit(
-                'app', 'replaceBox', 
-                [this.groupName, this.boxId, name]
-            );
-        }
-    },
+    }
 }
 </script>
 

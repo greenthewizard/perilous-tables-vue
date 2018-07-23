@@ -24,6 +24,10 @@ export default {
         icon: String,
         boxId: String,
         event: String,
+        context: {
+            type: String,
+            default: "app"
+        },
         selected: {
             type: Boolean,
             default: false
@@ -35,14 +39,6 @@ export default {
         type: {
             type: String,
             default: "button"
-        },
-        global: {
-            type: Boolean,
-            default: false
-        },
-        local: {
-            type: Boolean,
-            default: true
         }
     },
     data() {
@@ -58,12 +54,7 @@ export default {
             if (!this.event) {
                 return false
             }
-            if (this.local) {
-                EventBus.emit(this.boxId, this.event, this.args);
-            }
-            if (this.global) {
-                EventBus.emit('app', this.event, this.args);
-            }
+            EventBus.emit(this.context, this.event, this.args);
         }
     }
 }
