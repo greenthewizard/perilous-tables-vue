@@ -57,7 +57,6 @@ import { EventBus } from '../eventBus';
                     default:
                         break;
                 }
-                
             },
             getSelectedButtons() {
                 const buttonNames = this.buttons.map(btn => btn.value);
@@ -67,6 +66,7 @@ import { EventBus } from '../eventBus';
                     }
                     return acc;
                 }, {});
+                console.log(buttonData);
                 return buttonData;
             }
         },
@@ -78,10 +78,13 @@ import { EventBus } from '../eventBus';
 
 <style lang="sass" scoped>
     @import '../assets/styles/colors'
+    $gap: 0.3rem
 
     div
         display: grid
-        grid-gap: 0.3rem
+        grid-gap: $gap
+        margin-bottom: $gap
+
         h2
             grid-column: 1 / -1
             font-size: 1.5rem
