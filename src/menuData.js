@@ -127,6 +127,7 @@ export const menuData = {
             component: 'ButtonGrid',
             props: {
               type: 'radio',
+              groupName: 'Size',
               buttons: [
                 {
                   value: "Small",
@@ -187,6 +188,7 @@ export const menuData = {
       content: [
         {
           component: 'ButtonGrid',
+          groupName: 'context',
           props: {
             type: "checkbox",
             cols: 3,
@@ -203,6 +205,20 @@ export const menuData = {
                 value: "Urban",
                 selected: false
               }
+            ]
+          }
+        },
+        {
+          component: 'ButtonGrid',
+          props: {
+            type: "checkbox",
+            cols: 1,
+            buttons: [
+              {
+                value: "Create as Follower?",
+                dataName: "follower",
+                selected: false
+              },
             ]
           }
         }
