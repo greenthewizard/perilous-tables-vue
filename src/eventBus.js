@@ -8,5 +8,5 @@ export const EventBus = new Vue({
         emit(componentId, event, args) {
             this.$emit(`${componentId}-${event}`, args);
         }
-    },
+    }
 });

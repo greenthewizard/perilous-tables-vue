@@ -1,12 +1,16 @@
 <template>
     <pt-box
-        v-bind="boxProps">
+        title="Generate"
+        subTitle="Draw maps, leave blanks..">
         <template slot="titleButtons">
         </template>
         <template slot="content">
             <button-grid>
                 <pt-button
-                    value="Dungeon">
+                    value="Dungeon"
+                    context="app" 
+                    event="addNewBox"
+                    :args="[groupName, 'GenDungeon']">
                 </pt-button>
                 <pt-button
                     value="Town">
@@ -23,38 +27,19 @@
 </template>
 
 <script>
-import PtBox from '../PtBox.vue';
+//Mixin
+import boxMixin from '../mixins/boxMixin';
+
+//Components
 import ButtonGrid from '../ButtonGrid.vue';
 import PtButton from '../PtButton.vue';
 
-import { EventBus } from '../../eventBus';
-
 export default {
-    props: {
-        boxId: String,
-        groupName: String
-    },
+    mixins: [boxMixin],
     components: {
-        PtBox,
         ButtonGrid,
         PtButton
-    },
-    data() {
-        return {
-            boxProps: {
-                title: 'Generate',
-                subTitle: 'Draw maps, leave blanks..'
-            }
-        }
-    },
-    methods: {
-        replaceBox(name) {
-            EventBus.emit(
-                'app', 'replaceBox', 
-                [this.groupName, this.boxId, name]
-            );
-        }
-    },
+    }
 }
 </script>
 

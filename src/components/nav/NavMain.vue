@@ -1,6 +1,7 @@
 <template>
     <pt-box
-        v-bind="boxProps">
+        title="Main"
+        subTitle="Create and explore..">
         <template slot="titleButtons">
         </template>
         <template slot="content">
@@ -15,7 +16,7 @@
                     value="Explore"
                     context="app"
                     event="replaceBox"
-                    :args="[groupName, boxId, 'NavExplore']">
+                    :args="[groupName, boxId, 'NavExplore']"> 
                 </pt-button>
             </button-grid>
         </template>
@@ -23,27 +24,18 @@
 </template>
 
 <script>
-import PtBox from '../PtBox.vue';
+//Mixin
+import boxMixin from '../mixins/boxMixin';
+
+//Components
 import ButtonGrid from '../ButtonGrid.vue';
 import PtButton from '../PtButton.vue';
 
 export default {
-    props: {
-        boxId: String,
-        groupName: String
-    },
+    mixins: [boxMixin],
     components: {
-        PtBox,
         ButtonGrid,
         PtButton
-    },
-    data() {
-        return {
-            boxProps: {
-                title: 'Main',
-                subTitle: 'Create and explore..'
-            }
-        }
     }
 }
 </script>
