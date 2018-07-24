@@ -15,6 +15,7 @@
 <script>
 //Components
 import boxComponents from './components/boxBarrel.js';
+import Vue from 'vue';
 
 //Libraries/Utils
 import { EventBus } from './eventBus';
@@ -31,24 +32,29 @@ export default {
     }
   },
   methods: {
-    createNewBox: function (group, componentName) {
-      const id = uniqueId('box-');
+    createNewBox: function (groupName, name) {
+      const boxId = uniqueId('box-');
       return {
-        name: componentName,
-        id,
+        name,
+        boxId,
         props: {
-          boxId: id,
-          groupName: group
+          boxId,
+          groupName
         }
       };
     },
-    addNewBox: function(groupName, componentName) {
+    addNewBox: function(args) {
+      const [groupName, componentName] = args;
+      if (!this.boxes[groupName]) {
+        Vue.set(this.boxes, groupName, []);
+      }
       this.boxes[groupName].push(this.createNewBox(groupName, componentName));
     },
     replaceBox(args) {
       const [groupName, boxId, name] = args;
       const targetIndex = this.boxes[groupName].findIndex(el => el.id === boxId);
-      this.boxes[groupName].splice(targetIndex, 1, this.createNewBox(groupName, name));
+      this.boxes[groupName]
+        .splice(targetIndex, 1, this.createNewBox(groupName, name));
     },
     getCombinedBoxList: function () {
       const boxList = Object.values(this.boxes).reduce((acc, val) => {
@@ -63,8 +69,7 @@ export default {
     EventBus.on('app', 'addNewBox', this.addNewBox)
     EventBus.on('app', 'replaceBox', this.replaceBox)
 
-    this.addNewBox('main', 'NavMain');
-    this.addNewBox('main', 'NavMain');
+    this.addNewBox(['main', 'NavMain']);
   }
 }
 </script>
