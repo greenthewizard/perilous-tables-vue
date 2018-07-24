@@ -13,7 +13,7 @@ const resolveString = (str) => {
 
     return Promise.all(newTables)
     .then(tbls => tbls.map(tbl => tbl.roll()))
-    .then(tbls => str.replace(tblRefRegEx, _ => tbls.shift().result))
+    .then(tbls => str.replace(tblRefRegEx, () => tbls.shift().result))
     .then(newStr => {
         return tblRefRegEx.test(newStr)
             ? resolveString(newStr) 
@@ -32,7 +32,7 @@ const resolveStringWithNames = (str) => {
 
     return Promise.all(newTables)
     .then(tbls => tbls.map(tbl => tbl.roll()))
-    .then(tbls => str.replace(tblRefRegEx, _ => {
+    .then(tbls => str.replace(tblRefRegEx, () => {
         const tbl = tbls.shift();
         return `${tbl.tableName}: ${tbl.result}`
     }))
