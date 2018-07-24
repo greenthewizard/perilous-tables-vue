@@ -7,26 +7,10 @@
                         <h2 class="title">{{ title }}</h2>
                         <h3 class="sub-title">{{ subTitle }}</h3>
                     </div>
-                    <slot name="titleButtons"></slot>
-                    <!-- TITLE BUTTONS -->
-                    <!-- <div 
+                    <div 
                         class="l-flexitem l-flexitem--end-cap">
-                        <pt-button
-                            type="image"
-                            icon="back"
-                            value="Back"
-                            event="goBack"
-                            :boxId="id"
-                            v-if="history.length > 0">
-                        </pt-button>
-                        <pt-button
-                            v-for="(titleButton, i) in titleButtons"
-                            type="image"
-                            :key="i"
-                            :boxId="id"
-                            v-bind="titleButton">
-                        </pt-button>
-                    </div> -->
+                        <slot name="titleButtons"></slot>
+                    </div>
                 </div>
             </div>
         </header>
