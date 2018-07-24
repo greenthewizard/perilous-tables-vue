@@ -10,16 +10,25 @@
                     value="Dungeon"
                     context="app" 
                     event="addNewBox"
-                    :args="[groupName, 'GenDungeon']">
+                    :args="['generate', 'GenDungeon']">
                 </pt-button>
                 <pt-button
-                    value="Town">
+                    value="Town"
+                    context="app" 
+                    event="addNewBox"
+                    :args="['generate', 'GenTown']">
                 </pt-button>
                 <pt-button
-                    value="Creature">
+                    value="Creature"
+                    context="app" 
+                    event="addNewBox"
+                    :args="['generate', 'GenNPC']">
                 </pt-button>
                 <pt-button
-                    value="NPC">
+                    value="NPC"
+                    context="app" 
+                    event="addNewBox"
+                    :args="['generate', 'GenNPC']">
                 </pt-button>
             </button-grid>
         </template>
