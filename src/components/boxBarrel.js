@@ -1,6 +1,6 @@
-import NavMain from './nav/NavMain.vue';
-import NavGenerate from './nav/NavGenerate.vue';
-import GenDungeon from './nav/GenDungeon.vue';
+import NavMain from './boxes/nav/NavMain.vue';
+import NavGenerate from './boxes/nav/NavGenerate.vue';
+import GenDungeon from './boxes/generators/GenDungeon.vue';
 
 export default {
     NavMain,

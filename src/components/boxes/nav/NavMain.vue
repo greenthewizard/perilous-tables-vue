@@ -25,11 +25,11 @@
 
 <script>
 //Mixin
-import boxMixin from '../mixins/boxMixin';
+import boxMixin from 'mixins/boxMixin';
 
 //Components
-import ButtonGrid from '../ButtonGrid.vue';
-import PtButton from '../PtButton.vue';
+import ButtonGrid from 'components/ButtonGrid.vue';
+import PtButton from 'components/PtButton.vue';
 
 export default {
     mixins: [boxMixin],
