@@ -3,6 +3,15 @@
         title="Generate"
         subTitle="Draw maps, leave blanks..">
         <template slot="titleButtons">
+            <pt-button
+                value="Generate"
+                type="image"
+                icon="back"
+                alt="Back arrow"
+                context="app"
+                event="goBack"
+                :args="[boxId]">
+            </pt-button>
         </template>
         <template slot="content">
             <button-grid>

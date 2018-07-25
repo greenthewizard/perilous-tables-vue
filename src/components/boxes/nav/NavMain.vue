@@ -3,6 +3,16 @@
         title="Main"
         subTitle="Create and explore..">
         <template slot="titleButtons">
+            <pt-button
+                value="Generate"
+                type="image"
+                icon="back"
+                alt="Back arrow"
+                context="app"
+                event="goBack"
+                :args="[boxId]"
+                v-if="history.length > 0">
+            </pt-button>
         </template>
         <template slot="content">
             <button-grid>
@@ -10,13 +20,13 @@
                     value="Generate"
                     context="app"
                     event="replaceBox"
-                    :args="[groupName, boxId, 'NavGenerate']">
+                    :args="[boxId, 'NavGenerate']">
                 </pt-button>
                 <pt-button
                     value="Explore"
                     context="app"
                     event="replaceBox"
-                    :args="[groupName, boxId, 'NavExplore']"> 
+                    :args="[boxId, 'NavExplore']"> 
                 </pt-button>
             </button-grid>
         </template>

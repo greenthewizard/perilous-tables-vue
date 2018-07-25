@@ -6,7 +6,7 @@
         v-for="boxObj in getCombinedBoxList()" 
         :is="boxObj.name"
         :key="boxObj.id"
-        v-bind="boxObj.props">
+        v-bind="boxObj">
       </component>
     </div>
   </div>
@@ -26,21 +26,17 @@ export default {
   components: Object.assign({}, boxComponents),
   data: function () {
     return {
-      boxes: {
-        "main": []
-      }
+      boxes: {}
     }
   },
   methods: {
-    createNewBox: function (groupName, name) {
+    createNewBox: function (groupName, componentName) {
       const boxId = uniqueId('box-');
       return {
-        name,
+        name: componentName,
         boxId,
-        props: {
-          boxId,
-          groupName
-        }
+        groupName,
+        history: []
       };
     },
     addNewBox: function(args) {
@@ -50,11 +46,21 @@ export default {
       }
       this.boxes[groupName].push(this.createNewBox(groupName, componentName));
     },
+    getBoxById(boxId){
+      return this.getCombinedBoxList().find(el => el.boxId === boxId);
+    },
     replaceBox(args) {
-      const [groupName, boxId, name] = args;
-      const targetIndex = this.boxes[groupName].findIndex(el => el.id === boxId);
-      this.boxes[groupName]
-        .splice(targetIndex, 1, this.createNewBox(groupName, name));
+      const [boxId, componentName] = args;
+      const targetBox = this.getBoxById(boxId);
+      targetBox.history.push(targetBox.name);
+      targetBox.name = componentName;
+    },
+    goBack(args) {
+      const [boxId] = args;
+      const targetBox = this.getBoxById(boxId);
+      if (targetBox.history.length > 0) {
+        targetBox.name = targetBox.history.pop();
+      }
     },
     getCombinedBoxList: function () {
       const boxList = Object.values(this.boxes).reduce((acc, val) => {
@@ -66,8 +72,9 @@ export default {
   },
   created: function() {
     //Register Event Listeners
-    EventBus.on('app', 'addNewBox', this.addNewBox)
-    EventBus.on('app', 'replaceBox', this.replaceBox)
+    EventBus.on('app', 'addNewBox', this.addNewBox);
+    EventBus.on('app', 'replaceBox', this.replaceBox);
+    EventBus.on('app', 'goBack', this.goBack);
 
     this.addNewBox(['main', 'NavMain']);
   }
