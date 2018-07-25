@@ -47,17 +47,10 @@
 <script>
 //Mixin
 import boxMixin from 'mixins/boxMixin';
-
-//Components
-import ButtonGrid from 'components/ButtonGrid.vue';
-import PtButton from 'components/PtButton.vue';
+import navMixin from 'mixins/navMixin';
 
 export default {
-    mixins: [boxMixin],
-    components: {
-        ButtonGrid,
-        PtButton
-    }
+    mixins: [boxMixin, navMixin]
 }
 </script>
 

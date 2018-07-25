@@ -30,19 +30,10 @@
 <script>
 //Mixin
 import boxMixin from 'mixins/boxMixin';
-
-//Components
-import ButtonGrid from 'components/ButtonGrid.vue';
-import BackButton from 'components/buttons/BackButton.vue';
-import PtButton from 'components/PtButton.vue';
+import navMixin from 'mixins/navMixin';
 
 export default {
-    mixins: [boxMixin],
-    components: {
-        ButtonGrid,
-        BackButton,
-        PtButton
-    }
+    mixins: [boxMixin, navMixin]
 }
 </script>
 
