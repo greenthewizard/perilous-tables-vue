@@ -3,16 +3,10 @@
         title="Main"
         subTitle="Create and explore..">
         <template slot="titleButtons">
-            <pt-button
-                value="Generate"
-                type="image"
-                icon="back"
-                alt="Back arrow"
-                context="app"
-                event="goBack"
-                :args="[boxId]"
+            <back-button 
+                :boxId="boxId"
                 v-if="history.length > 0">
-            </pt-button>
+            </back-button>
         </template>
         <template slot="content">
             <button-grid>
@@ -39,12 +33,14 @@ import boxMixin from 'mixins/boxMixin';
 
 //Components
 import ButtonGrid from 'components/ButtonGrid.vue';
+import BackButton from 'components/buttons/BackButton.vue';
 import PtButton from 'components/PtButton.vue';
 
 export default {
     mixins: [boxMixin],
     components: {
         ButtonGrid,
+        BackButton,
         PtButton
     }
 }
