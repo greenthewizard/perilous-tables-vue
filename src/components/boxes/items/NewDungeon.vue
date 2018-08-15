@@ -5,7 +5,10 @@
         <template slot="titleButtons">
         </template>
         <template slot="content">
-            
+            <h4>Themes</h4>
+            <ul>
+                
+            </ul>
         </template>
     </pt-box>
 </template>
@@ -24,7 +27,19 @@ export default {
     },
     data() {
         return {
-            dungeonName: "New Dungeon"
+            dungeonName: "New Dungeon",
+        }
+    },
+    computed: {
+        sizeNumber() {
+            const sizes = {
+                'Small': 2,
+                'Medium': 3,
+                'Large': 4,
+                'Huge': 5
+            }
+
+            return sizes[this.options.size];
         }
     }
 }
