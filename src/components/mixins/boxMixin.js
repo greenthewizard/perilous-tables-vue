@@ -5,7 +5,8 @@ export default {
         name: String,
         boxId: String,
         groupName: String,
-        history: Array
+        history: Array,
+        options: Object
     },
     components: {
         PtBox

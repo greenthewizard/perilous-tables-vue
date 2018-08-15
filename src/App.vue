@@ -30,21 +30,22 @@ export default {
     }
   },
   methods: {
-    createNewBox: function (groupName, componentName) {
+    createNewBox: function (groupName, componentName, options) {
       const boxId = uniqueId('box-');
       return {
         name: componentName,
         boxId,
         groupName,
-        history: []
+        history: [],
+        options
       };
     },
     addNewBox: function(args) {
-      const [groupName, componentName] = args;
+      const [groupName, componentName, options] = args;
       if (!this.boxes[groupName]) {
         Vue.set(this.boxes, groupName, []);
       }
-      this.boxes[groupName].push(this.createNewBox(groupName, componentName));
+      this.boxes[groupName].push(this.createNewBox(groupName, componentName, options));
     },
     getBoxById(boxId){
       return this.getCombinedBoxList().find(el => el.boxId === boxId);

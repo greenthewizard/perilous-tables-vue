@@ -5,6 +5,23 @@
         <template slot="titleButtons">
         </template>
         <template slot="content">
+            <label class="control control--checkbox"> Small
+                <input type="radio" value="Small" name="size" v-model="size"/>
+            </label>
+            <label class="control control--checkbox"> Medium
+                <input type="radio" value="Medium" name="size" v-model="size"/>
+            </label>
+            <label class="control control--checkbox"> Large
+                <input type="radio" value="Large" name="size" v-model="size"/>
+            </label>
+            <label class="control control--checkbox"> Huge
+                <input type="radio" value="Huge" name="size" v-model="size"/>
+            </label>
+            <pt-button
+                value="Generate"
+                event="addNewBox"
+                :args="['dungeons', 'NewDungeon', { size }]">
+            </pt-button>
         </template>
     </pt-box>
 </template>
@@ -22,6 +39,11 @@ export default {
     components: {
         ButtonGrid,
         PtButton
+    },
+    data() {
+        return {
+            size: 'Medium'
+        }
     }
 }
 </script>
