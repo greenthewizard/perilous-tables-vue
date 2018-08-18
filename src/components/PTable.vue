@@ -1,20 +1,21 @@
 <template>
-    <div>
-        <p v-if="result">{{ result }}</p>
-    </div>
+    <span>
+        <slot :result="result"></slot>
+    </span>
 </template>
 
 <script>
 import perilous from '../js/perilous/perilous';
-import { EventBus } from '../eventBus'
+// import { EventBus } from '../eventBus';
 
 export default {
     props: {
-        boxId: String
+        boxId: String,
+        tableRef: String
     },
     data() {
         return {
-            intialTableRef: 'tbl:creature/monster[base]',
+            intialTableRef: this.tableRef,
             table: null,
             result: null
         }
@@ -31,7 +32,8 @@ export default {
     },
     created() {
         this.table = perilous.table(this.intialTableRef);
-        EventBus.on(this.boxId, 'roll', this.rollTable);
+        this.rollTable();
+        console.log('Created');
     }
 }
 </script>
@@ -39,8 +41,5 @@ export default {
 <style lang="sass" scoped>
 @import '../assets/styles/colors'
 
-p
-    margin: 0
-    padding: 0
-    color: $lightgrey
+
 </style>

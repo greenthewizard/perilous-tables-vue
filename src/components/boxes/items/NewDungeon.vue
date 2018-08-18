@@ -1,13 +1,19 @@
 <template>
     <pt-box
-        :title="dungeonName"
+        title="New Dungeon"
         :subTitle="options.size">
         <template slot="titleButtons">
         </template>
         <template slot="content">
             <h4>Themes</h4>
             <ul>
-                
+                <li 
+                    v-for="n in sizeNumber"
+                    :key="boxId + '-' + n">
+                        <p-table tableRef="tbl:dungeon/theme[base]">
+                            <span slot-scope="t">{{ t.result }}</span>
+                        </p-table>
+                </li>
             </ul>
         </template>
     </pt-box>
@@ -18,12 +24,12 @@
 import boxMixin from 'mixins/boxMixin';
 
 //Components
-// import YourComponent from '../YourComponent.vue;
+import PTable from 'components/PTable.vue';
 
 export default {
     mixins: [boxMixin],
     components: {
-        
+        PTable
     },
     data() {
         return {
