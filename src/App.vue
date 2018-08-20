@@ -1,9 +1,12 @@
 <template>
   <div id="app">
     <h1>Perilous Tables</h1>
-    <div class="grid-container">
+    <div 
+      class="grid-container"
+      v-for="section in Object.keys(boxes)"
+      :key="section">
       <component 
-        v-for="boxObj in getCombinedBoxList()" 
+        v-for="boxObj in sortedBoxList(section)" 
         :is="boxObj.name"
         :key="boxObj.id"
         v-bind="boxObj">
@@ -62,6 +65,9 @@ export default {
       if (targetBox.history.length > 0) {
         targetBox.name = targetBox.history.pop();
       }
+    },
+    sortedBoxList: function(section) {
+      return this.boxes[section].slice(0).reverse();
     },
     getCombinedBoxList: function () {
       const boxList = Object.values(this.boxes).reduce((acc, val) => {
